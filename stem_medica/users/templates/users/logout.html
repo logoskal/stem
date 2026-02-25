@@ -1,0 +1,9 @@
+{% extends "home/base.html" %} {% load crispy_forms_tags %} {% load crispy_forms_tags %} {% block content%}
+<div class="container mt-5">
+	{% if user.is_authenticated %}
+	<p class="text display-3 text-center">You've been successfully logged out</p>
+	{% else %}
+	<p class="text-danger display-3 text-center">You Are Logged Out</p>
+	{% endif %}
+</div>
+{%endblock content%}

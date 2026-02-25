@@ -1,0 +1,60 @@
+{% extends "home/base.html" %} {% load crispy_forms_tags %} {% block content%}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+<!--- Contact Us Page Content --->
+<div class="container mt-5">
+	<h2 class="text-center green-underline" style="font-size: 4rem">Our Social Media</h2>
+</div>
+<div class="container py-5">
+	<div class="row">
+		<div class="col-md-6">
+			<h2>Contact Us</h2>
+			<form>
+				<div class="mb-3">
+					<label for="name" class="form-label">Name</label>
+					<input type="text" class="form-control" id="name" placeholder="Your Name" />
+				</div>
+				<div class="mb-3">
+					<label for="email" class="form-label">Email address</label>
+					<input type="email" class="form-control" id="email" placeholder="Your Email" />
+				</div>
+				<div class="mb-3">
+					<label for="message" class="form-label">Message</label>
+					<textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+				</div>
+				<button type="submit" class="btn btn-primary mb-5">Send Message</button>
+			</form>
+		</div>
+		<div class="col-md-6">
+			<h3>Follow Us</h3>
+			<div class="d-flex">
+				<a href="https://facebook.com" class="btn btn-outline-primary me-2" target="_blank"> <i class="bi bi-facebook"></i> Facebook </a>
+				<a href="https://twitter.com" class="btn btn-outline-info me-2" target="_blank"> <i class="bi bi-twitter"></i> Twitter </a>
+				<a href="https://linkedin.com" class="btn btn-outline-primary me-2" target="_blank"> <i class="bi bi-linkedin"></i> LinkedIn </a>
+				<a href="https://wa.me/+251921136180" class="btn btn-outline-success" target="_blank"> <i class="bi bi-whatsapp"></i> Whatsapp </a>
+			</div>
+
+			<div class="container mt-5">
+				<!-- Location Card -->
+				<div class="card shadow-lg">
+					<div class="card-body d-flex align-items-center">
+						<!-- Location Icon -->
+						<div class="me-3">
+							<i class="fas fa-map-marker-alt fa-3x text-primary"></i>
+						</div>
+						<!-- Location Text -->
+						<div>
+							<h3 class="card-title">Come To Our Office</h3>
+							<p class="card-text">
+								<strong>Gerji, Addis Ababa</strong><br />
+								2nd Floor, Kal Building, Around Nyala Motors
+							</p>
+							<a href="https://maps.app.goo.gl/UBgA8gqJaJdJPbng8" target="_blank" class="btn btn-primary btn-sm"> <i class="fas fa-directions"></i> Get Directions </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{%endblock content%}

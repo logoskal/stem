@@ -1,0 +1,132 @@
+{%extends 'home/base.html' %} {% block content %}
+<!-- Link to Google Fonts for Lora -->
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+	/* Most Recent Blog Section */
+	.recent-blog {
+		font-size: 0.75rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		margin-bottom: 2em;
+		text-decoration: none;
+	}
+
+	.recent-blog img {
+		width: 90%;
+		height: auto;
+		border-radius: 8px;
+		margin-bottom: 1em;
+	}
+	@media (min-width: 1000px) {
+		.recent-blog {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			margin-bottom: 5rem;
+		}
+
+		.recent-blog img {
+			width: 50%;
+			height: auto;
+			border-radius: 8px;
+			margin-bottom: 1em;
+		}
+		.other-blogs {
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			list-style-type: none;
+			padding: 0;
+			margin-left: 20rem !important;
+			width: 70%;
+		}
+	}
+
+	.recent-blog h2 {
+		font-size: 2.5em;
+		margin: 0;
+		font-weight: bold;
+		color: #333;
+	}
+
+	.recent-blog p {
+		font-size: 1.2em;
+		color: #555;
+	}
+
+	/* Other Blogs Section */
+	.other-blogs {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.other-blogs li {
+		display: flex;
+		align-items: center;
+		margin-bottom: 1.5em;
+		padding: 1em;
+		background-color: #fafafa;
+		border-radius: 8px;
+		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+	}
+
+	.other-blogs img {
+		width: 150px;
+		height: 100px;
+		object-fit: cover;
+		border-radius: 8px;
+		margin-right: 1.5em;
+	}
+
+	.other-blogs h3 {
+		font-size: 1.25rem;
+		margin: 0;
+		color: #333;
+	}
+
+	.other-blogs p {
+		font-size: 1.1em;
+		color: #777;
+	}
+
+	/* Hover Effect for Each Blog Item */
+	.other-blogs li:hover {
+		background-color: #e0f7fa;
+		cursor: pointer;
+		transform: translateY(-5px);
+		transition: all 0.3s ease;
+	}
+</style>
+
+<main class="text-center">
+	<div class="blog-nav-container">
+		<h3 class="mb-5 display-1 green-underline">Our Latest Blogs</h3>
+		<!-- Most Recent Blog Section -->
+		<a class="recent-blog" href="{% url 'blog-page' last.pk %}">
+			<img src="{{last.bg_image.url}}" alt="Recent Blog" />
+			<h2 style="margin-bottom: 1rem">{{last.title}}</h2>
+			<p>Posted On {{last.date}}</p>
+		</a>
+
+		<!-- Other Blogs List Section -->
+		{% for blog in blogs %}
+		<a href="{% url 'blog-page' blog.pk %}" style="text-decoration: none">
+			<ul class="other-blogs">
+				<li>
+					<img src="{{blog.bg_image.url}}" alt="Blog 1" />
+					<div>
+						<h3>{{blog.title|slice:"0:24"}}...</h3>
+						<p>Posted On {{blog.date}}</p>
+					</div>
+				</li>
+			</ul>
+		</a>
+		{% endfor %}
+	</div>
+</main>
+{% endblock %}

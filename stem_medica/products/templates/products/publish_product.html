@@ -1,0 +1,22 @@
+{% extends "home/base.html" %} {% load crispy_forms_tags %} {% load crispy_forms_tags %} {% block content%}
+<section class="container mt-5 d-flex justify-content-center align-items-center">
+	{% if messages %}
+	<div class="alert-container">
+		{% for message in messages %}
+		<div class="alert alert-{{ message.tags }}">{{ message }}</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+	<div class="card w-100">
+		<div class="card-body">
+			<legend class="text-success display-3 text-center">PUBLISH A NEW PRODUCT</legend>
+			<form method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="justify-content-center">{{ form | crispy }}</div>
+				<div class="justify-content-center">{{ images }}</div>
+				<div class="text-center"><button class="btn btn-outline-success rounded-pill btn-lg">PUBLISH</button></div>
+			</form>
+		</div>
+	</div>
+</section>
+{% endblock %}

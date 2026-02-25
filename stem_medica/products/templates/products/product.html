@@ -1,0 +1,150 @@
+{% extends "home/base.html" %} {% block content%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+
+<section class="container mt-5">
+	<div class="row">
+		<div class="col-md-6">
+			<img src="{{product.images.first.image.url}}" class="img-fluid" alt="Product Image" />
+
+			<!-- Carousel-->
+			<div id="imgCarousel" class="carousel slide mt-4" data-ride="carousel">
+				<div class="carousel-inner">
+					<!--first-->
+					<div class="carousel-item active">
+						<div class="row">
+							{% for image in product.images.all|slice:":4" %}
+							<div class="col-3">
+								<a href="{{image.image.url}}"><img src="{{image.image.url}}" class="d-block w-100" alt="Other Product Images" style="max-height: 8rem; max-width: 8rem" /></a>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Product-->
+		<div class="col-md-6">
+			<h2 class="font-weight-bold">
+				{{product.name}}{% if user.is_authenticated %} <br /><br /><a class="btn btn-success btn-lg w-25" href="/config/products/product/{{product.id}}/change/"> Edit </a>
+				<a class="btn btn-danger btn-lg w-25" href="/config/products/product/{{product.id}}/delete/"> Delete </a>
+				{% endif %}
+			</h2>
+			<p class="text-success small">Model: {{product.model}}</p>
+			<p class="font-weight-light">{{product.description}}</p>
+
+			<!-- Table -->
+			<div class="table-wrapper" style="background-color: black; margin: 5px">
+				<table class="table mt-4" style="border: none">
+					<tbody>
+						<tr>
+							<th scope="row">Model</th>
+							<td>{{product.model}}</td>
+						</tr>
+						<tr>
+							<th scope="row">Brand</th>
+							<td>{{product.brand}}</td>
+						</tr>
+						<tr>
+							<th scope="row">Price</th>
+							<td>{{product.price}}</td>
+						</tr>
+						<tr>
+							<th scope="row">MOQ</th>
+							<td>{{product.quantity}}</td>
+						</tr>
+						<tr>
+							<th scope="row">Availability</th>
+							<td>{{product.status}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- Price and Quantity-->
+			<div class="d-flex align-items-center mb-3">
+				<a class="btn btn-success btn-lg me-2" href="https://wa.me/251921136180?text=Hello, I Want To Order {{product.name}} - {{product.model}}">Order On Whatsapp</a>
+				<a class="btn btn-success btn-lg" href="tel: +251921136180">Call Us</a>
+			</div>
+			<p>Categories: {{category.name}}</p>
+		</div>
+	</div>
+
+	{% if product.brochure %}
+
+	<style>
+		.pdf-container {
+			width: 90%; /* Set width of the container */
+			max-width: 800px; /* Limit the maximum width */
+			display: flex;
+			justify-content: center; /* Horizontal center for pages */
+			align-items: center; /* Vertical center for pages */
+			flex-wrap: wrap;
+			gap: 20px; /* Add spacing between pages */
+			padding: 10px;
+			background-color: #fff;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+		.pdf-page {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 10px;
+			border: 1px solid #ccc;
+		}
+		canvas {
+			display: block;
+			width: 100%;
+		}
+	</style>
+	<div class="pdf-container" id="pdf-container">
+		<h1 class="text-center">Detailed Information & Specs</h1>
+		<!-- Pages will be displayed here -->
+	</div>
+
+	<script>
+		const url = "{{product.brochure.url|slice:':-4'}}.pdf"; // Replace with the URL or path of your PDF
+
+		const renderPage = (pdf, pageNumber, canvasContainer) => {
+			pdf.getPage(pageNumber).then((page) => {
+				const canvas = document.createElement("canvas");
+				const context = canvas.getContext("2d");
+
+				// Set the desired scale
+				const scale = 1.5;
+				const viewport = page.getViewport({ scale });
+
+				canvas.width = viewport.width;
+				canvas.height = viewport.height;
+
+				// Render the page
+				page.render({
+					canvasContext: context,
+					viewport: viewport,
+				});
+
+				// Append canvas to the container
+				canvasContainer.appendChild(canvas);
+			});
+		};
+
+		const loadPDF = async () => {
+			const pdf = await pdfjsLib.getDocument(url).promise;
+			const pdfContainer = document.getElementById("pdf-container");
+
+			// Render the first three pages
+			for (let pageNumber = 1; pageNumber <= 3; pageNumber++) {
+				const pageContainer = document.createElement("div");
+				pageContainer.classList.add("pdf-page");
+				pdfContainer.appendChild(pageContainer);
+				renderPage(pdf, pageNumber, pageContainer);
+			}
+		};
+
+		loadPDF();
+	</script>
+
+	{% endif %}
+</section>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+{%endblock content%}

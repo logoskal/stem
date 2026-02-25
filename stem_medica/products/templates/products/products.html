@@ -1,0 +1,31 @@
+{% extends "home/base.html" %} {% load static %}{% block content%}
+<main class="main">
+	<div class="container mt-5">
+		<div id="more-services" class="more-services section">
+			<div class="container section-title" data-aos="fade-up">
+				<h2 style="font-size: 4.5rem">PRODUCTS</h2>
+				<p>List of All Recent Products</p>
+			</div>
+			<div class="container my-5">
+				<div class="row g-3">
+					{% for result in results %}
+					<div class="col-md-6" data-aos="fade-up" data-aos-delay="50">
+						<a href="{% url 'product-page' result.id %}" class="card" style="height: 33rem; text-decoration-line: none">
+							<img src="{{result.images.first.image.url}} " class="img-fluid" alt="" style="height: 14rem" />
+							<h3>{{result.name}} ({{result.brand}})</h3>
+							<p>{{result.description|slice:":50"}}...</p>
+						</a>
+					</div>
+					{% endfor %}
+					<!-- End Card Item -->
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<p><br /></p>
+<p><br /></p>
+<p><br /></p>
+{% endblock %}

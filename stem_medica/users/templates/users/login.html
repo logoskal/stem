@@ -1,0 +1,14 @@
+{% extends "home/base.html" %} {% load crispy_forms_tags %} {% load crispy_forms_tags %} {% block content%}
+<div class="container mt-5">
+	<div class="card">
+		<div class="card-body">
+			<form method="POST">
+				{% csrf_token %}
+				<legend class="text-success display-3 text-center">COMPANY STAFF LOGIN</legend>
+				<div class="justify-content-center">{{ form | crispy }}</div>
+				<div class="text-center"><button class="btn btn-outline-success rounded-pill btn-lg">LOGIN</button></div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

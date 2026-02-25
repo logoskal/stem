@@ -1,0 +1,168 @@
+{%extends 'home/base.html' %} {% block content %}
+<!-- Link to Google Fonts for Lora -->
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+	/* Global font family definition */
+	body {
+		font-family: "Lora", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	}
+
+	/* Minimal Reset and Simple Styling */
+
+	/* Title Section with Background Image */
+	.blog-title {
+		position: relative;
+		width: 100%;
+		height: 400px;
+		background-image: url("{{blog.bg_image.url}}"); /* Replace with your image */
+		background-size: cover;
+		background-position: center;
+		color: white;
+		text-align: center;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 2em 0;
+		margin-bottom: 0.5em; /* Space below the title */
+	}
+
+	.blog-title h1 {
+		font-size: 2.5rem;
+		margin: 0;
+		font-weight: bold;
+		text-shadow: 1px 1px 0 green, -1px -1px 0 green, 1px -1px 0 green, -1px 1px 0 green;
+	}
+
+	.blog-title p {
+		font-style: italic;
+		font-size: 1.5em;
+		margin-bottom: 0;
+		padding-top: 1rem;
+		color: green;
+		text-shadow: 1px 1px 0 white, -1px -1px 0 green, 1px -1px 0 white, -1px 1px 0 white;
+	}
+
+	/* Content Section Styles */
+	@media (min-width: 1000px) {
+		.content-section {
+			width: 50% !important;
+		}
+
+		.blog-title h1 {
+			font-size: 6rem;
+			margin: 0;
+			font-weight: bold;
+			text-shadow: 1px 1px 0 green, -1px -1px 0 green, 1px -1px 0 green, -1px 1px 0 green;
+		}
+
+		.blog-title p {
+			font-size: 2.5 rem;
+			margin: 0;
+			padding-top: 1rem;
+			color: green;
+			text-shadow: 1px 1px 0 white, -1px -1px 0 green, 1px -1px 0 white, -1px 1px 0 white;
+		}
+	}
+	.content-section {
+		width: 95%;
+		margin: 0 auto;
+		padding: 1em;
+		background-color: white;
+		border-radius: 8px;
+		margin-bottom: 0rem;
+	}
+
+	.content-section h2 {
+		color: #333;
+		font-size: 2em;
+		margin-bottom: 2rem;
+	}
+
+	.content-section p {
+		line-height: 1.6;
+		font-size: 1.1em;
+		color: #555;
+		margin-bottom: 3rem;
+	}
+
+	.content-section img {
+		width: 100%;
+		height: auto;
+		border-radius: 8px;
+		margin-bottom: 1rem;
+	}
+
+	.cta {
+		background-color: #4caf50;
+		color: white;
+		text-align: center;
+		padding: 1.5em;
+		font-size: 1.2em;
+		border-radius: 8px;
+	}
+
+	.cta a {
+		color: white;
+		text-decoration: none;
+		font-weight: bold;
+	}
+
+	.benefits ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
+	.benefits ul li {
+		margin-bottom: 1em;
+		padding-left: 1.5em;
+		position: relative;
+	}
+
+	.benefits ul li::before {
+		content: "✔";
+		position: absolute;
+		left: 0;
+		top: 0;
+		color: #4caf50;
+	}
+</style>
+<!-- Title Section with Background Image -->
+<section class="blog-title dark-background">
+	<div>
+		<h1>{{blog.title}}</h1>
+		<p>{{blog.subtitle}}</p>
+		<h6 style="font-size: 1rem">Posted On {{blog.date}}</h6>
+	</div>
+</section>
+
+<!-- Main Content Section -->
+<div class="content-section">
+	<!-- Introduction Section -->
+	<section class="defintion" style="margin-bottom: 0rem !important">
+		<p>{{blog.intro|safe}}</p>
+	</section>
+
+	<!-- What is Mindfulness Meditation Section -->
+	<section class="definition text-center">
+		<h2>{{blog.header_1}}</h2>
+		<p>{{blog.content_1|safe}}</p>
+		{% if blog.content_1_image %}
+		<img src="{{blog.content_1_image.url}}" alt="Mindfulness Meditation" />
+		{% endif %}
+	</section>
+
+	<!-- Benefits Section -->
+	<section class="benefits">
+		<h2>{{blog.header_2}}</h2>
+		<p>{{blog.content_2|safe}}</p>
+		{% if blog.content_2_image %}
+		<img src="{{blog.content_2_image.url}}" alt="Mindful Living" />
+		{% endif %}
+	</section>
+
+	<!-- How to Start Section -->
+
+	<!-- Call to Action Section -->
+</div>
+{%endblock content%}

@@ -1,0 +1,30 @@
+{% extends "home/base.html" %} {% load static %}{% block content%}
+
+<main class="main">
+	<div class="container">
+		<div id="more-services" class="more-services section">
+			<div class="container section-title" data-aos="fadeup">
+				<h3 class="green-underline" style="font-size: 3.5rem">{{category.name}}</h3>
+				<p>{{ category.description}}</p>
+			</div>
+			<div class="container mt-3 mb-5">
+				<div class="row g-3">
+					{% if not category.products.all %}
+					<div class="text-danger display-4 text-center">PRODUCTS NOT FOUND FOR <br />"{{category.name.upper}}"</div>
+					{% endif %} {% for product in category.products.all %}
+					<div class="col-lg-3" data-aos="fade-up" data-aos-delay="50">
+						<a class="card" href="{% url 'product-page' product.id%}" style="text-decoration-line: none">
+							<img src="{{product.images.first.image.url}}" class="card-img-top img-fluid d-block mx-auto" alt="product image" style="min-height: 10rem; max-height: 10rem; max-width: 10rem" oncontextmenu="return false;" />
+							<h3 style="font-size: 1.5rem">{{product.name}} ({{product.brand}})</h3>
+							<p class="card-text text-muted">{{product.description|slice:":70"}}...</p>
+						</a>
+					</div>
+
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+{% endblock %}
